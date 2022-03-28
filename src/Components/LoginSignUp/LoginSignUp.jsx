@@ -1,9 +1,9 @@
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { useState } from "react";
-import { store } from "../../Redux/store";
-import {useSelector, useDispatch} from "../../Redux/Login/action.js"
-import { Link, Navigate } from "react-router-dom";
+// import { store } from "../../Redux/store";
+// import {useSelector, useDispatch} from "../../Redux/Login/action.js"
+// import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export const LoginSignUp = () => {
@@ -14,8 +14,8 @@ export const LoginSignUp = () => {
     interests: [],
     image: ""
   });
-  const dispatch = useDispatch();
-  const logData  = useSelector((store) => store.user);
+  // const dispatch = useDispatch();
+  // const logData  = useSelector((store) => store.user);
   const handleChange = (event) => {
     const {id, value} = event.target;
     setUserSU({
@@ -62,16 +62,12 @@ const [userSI, setUserSI] = useState({
   };
   let navigate = useNavigate();
   const handleSignin = (e) => {
-    const getUsers = () => {
-      axios.get("http://localhost:8080/users")
-      .then(res => {
-        storeUsers(res);
-      })
-    };
-    users.map((el) => {
+    getUsers();
+    users.foreach((el) => {
       if(el.name===userSI.name && el.password===userSI.password){
         alert("Signed In");
         navigate("/");
+        return
       }
     })
   }
